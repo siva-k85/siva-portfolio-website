@@ -1,111 +1,19 @@
 nodes:
-  # Core Technologies
   - { id: "Python", kind: "tech", score: 5.0 }
-  - { id: "SQL", kind: "tech", score: 5.0 }
-  - { id: "TypeScript", kind: "tech", score: 4.5 }
-  - { id: "React", kind: "tech", score: 4.5 }
-  - { id: "Node.js", kind: "tech", score: 4.0 }
   - { id: "GCP", kind: "tech", score: 4.5 }
-  - { id: "Firebase", kind: "tech", score: 4.0 }
-  - { id: "PostgreSQL", kind: "tech", score: 4.5 }
-  - { id: "Prisma", kind: "tech", score: 4.0 }
-  - { id: "Next.js", kind: "tech", score: 4.5 }
-  - { id: "Three.js", kind: "tech", score: 3.5 }
-  - { id: "Tableau", kind: "tech", score: 4.5 }
-  - { id: "FlutterFlow", kind: "tech", score: 3.5 }
-  - { id: "DistilBERT", kind: "tech", score: 4.0 }
-  - { id: "Epic EHR", kind: "tech", score: 4.0 }
-
-  # Core Skills
   - { id: "Healthcare Analytics", kind: "skill", score: 5.0 }
-  - { id: "Product Management", kind: "skill", score: 4.5 }
-  - { id: "AI/ML", kind: "skill", score: 4.5 }
+  - { id: "Product Management", kind: "skill", score: 4.0 }
   - { id: "NLP", kind: "skill", score: 4.0 }
-  - { id: "Data Engineering", kind: "skill", score: 4.5 }
-  - { id: "Optimization", kind: "skill", score: 4.0 }
-  - { id: "System Architecture", kind: "skill", score: 4.5 }
-  - { id: "HIPAA Compliance", kind: "skill", score: 4.5 }
-  - { id: "Clinical Informatics", kind: "skill", score: 4.5 }
-  - { id: "ACGME Milestones", kind: "skill", score: 4.0 }
-
-  # Projects
-  - { id: "Project EMMA", kind: "project", score: 5.0, slug: "project-emma-residency-eval" }
-  - { id: "UHS Insurance Chatbot", kind: "project", score: 4.5, slug: "rag-insurance-chatbot-cmu" }
-  - { id: "Readmission Prediction", kind: "project", score: 4.5, slug: "cdss-readmission-prediction" }
-  - { id: "Nurse Scheduling", kind: "project", score: 4.0, slug: "nurse-scheduling-optimization" }
+  - { id: "Optimization", kind: "skill", score: 3.5 }
   - { id: "Quantiphi Client Solutions", kind: "project", score: 4.0 }
-  - { id: "Fractal/Qure.Ai", kind: "project", score: 3.5 }
-
-  # Organizations
-  - { id: "CMU", kind: "org", score: 5.0 }
-  - { id: "Allegheny General", kind: "org", score: 4.5 }
-  - { id: "UPMC", kind: "org", score: 4.5 }
-  - { id: "Quantiphi", kind: "org", score: 4.0 }
-  - { id: "Fractal Analytics", kind: "org", score: 3.5 }
-
+  - { id: "Fractal/Qure.Ai", kind: "project", score: 3.0 }
 links:
-  # Technology connections
-  - ["Python", "Healthcare Analytics"]
-  - ["Python", "AI/ML"]
-  - ["Python", "NLP"]
-  - ["Python", "Data Engineering"]
-  - ["SQL", "Healthcare Analytics"]
-  - ["SQL", "Data Engineering"]
-  - ["TypeScript", "React"]
-  - ["TypeScript", "Next.js"]
-  - ["React", "Next.js"]
-  - ["Node.js", "Next.js"]
-  - ["GCP", "Firebase"]
-  - ["GCP", "Healthcare Analytics"]
-  - ["PostgreSQL", "Prisma"]
-  - ["PostgreSQL", "Data Engineering"]
-  - ["Tableau", "Healthcare Analytics"]
-  - ["Epic EHR", "Healthcare Analytics"]
-  - ["Epic EHR", "Clinical Informatics"]
-
-  # Skill connections
-  - ["Healthcare Analytics", "Product Management"]
-  - ["Healthcare Analytics", "Clinical Informatics"]
-  - ["AI/ML", "NLP"]
-  - ["AI/ML", "Optimization"]
-  - ["Data Engineering", "System Architecture"]
-  - ["HIPAA Compliance", "Healthcare Analytics"]
-  - ["ACGME Milestones", "Clinical Informatics"]
-
-  # Project-Technology connections
-  - ["Project EMMA", "FlutterFlow"]
-  - ["Project EMMA", "DistilBERT"]
-  - ["Project EMMA", "Firebase"]
-  - ["Project EMMA", "GCP"]
-  - ["Project EMMA", "NLP"]
-  - ["Project EMMA", "ACGME Milestones"]
-  - ["UHS Insurance Chatbot", "Python"]
-  - ["UHS Insurance Chatbot", "NLP"]
-  - ["UHS Insurance Chatbot", "AI/ML"]
-  - ["Readmission Prediction", "Python"]
-  - ["Readmission Prediction", "SQL"]
-  - ["Readmission Prediction", "Tableau"]
-  - ["Readmission Prediction", "Epic EHR"]
-  - ["Nurse Scheduling", "Python"]
-  - ["Nurse Scheduling", "Optimization"]
-  - ["Nurse Scheduling", "Healthcare Analytics"]
-  - ["Quantiphi Client Solutions", "Python"]
-  - ["Quantiphi Client Solutions", "GCP"]
-  - ["Quantiphi Client Solutions", "NLP"]
-  - ["Fractal/Qure.Ai", "Python"]
-  - ["Fractal/Qure.Ai", "AI/ML"]
-
-  # Organization connections
-  - ["CMU", "UHS Insurance Chatbot"]
-  - ["CMU", "Healthcare Analytics"]
-  - ["Allegheny General", "Project EMMA"]
-  - ["UPMC", "Readmission Prediction"]
-  - ["Quantiphi", "Quantiphi Client Solutions"]
-  - ["Fractal Analytics", "Fractal/Qure.Ai"]
-
-  # Project-Skill connections
-  - ["Project EMMA", "Product Management"]
-  - ["Project EMMA", "Healthcare Analytics"]
-  - ["UHS Insurance Chatbot", "System Architecture"]
-  - ["Readmission Prediction", "Clinical Informatics"]
-  - ["Nurse Scheduling", "Optimization"]
+  - ["Python","Healthcare Analytics"]
+  - ["GCP","Healthcare Analytics"]
+  - ["Python","NLP"]
+  - ["Healthcare Analytics","Product Management"]
+  - ["Optimization","Quantiphi Client Solutions"]
+  - ["NLP","Quantiphi Client Solutions"]
+  - ["Python","Quantiphi Client Solutions"]
+  - ["Healthcare Analytics","Fractal/Qure.Ai"]
+  - ["Python","Fractal/Qure.Ai"]
