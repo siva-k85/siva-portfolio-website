@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
+import type { GraphData } from '@/lib/graph'
 
 const Graph3D = dynamic(() => import('./Graph3D'), { ssr: false })
 const Graph2D = dynamic(() => import('./Graph2D'), { ssr: false })
@@ -12,13 +13,13 @@ function supportsWebGL() {
       window.WebGLRenderingContext &&
       (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
     )
-  } catch (e) {
+  } catch {
     return false
   }
 }
 
 interface GraphRendererProps {
-  data: any
+  data: GraphData
   focusId?: string | null
 }
 

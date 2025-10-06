@@ -4,11 +4,27 @@ import matter from 'gray-matter'
 import fg from 'fast-glob'
 import YAML from 'yaml'
 
-export async function buildGraph() {
+export type GraphNode = {
+  id: string
+  kind: 'project' | 'tech' | 'skill'
+  slug?: string
+}
+
+export type GraphLink = {
+  source: string
+  target: string
+}
+
+export type GraphData = {
+  nodes: GraphNode[]
+  links: GraphLink[]
+}
+
+export async function buildGraph(): Promise<GraphData> {
   const projDir = path.join(process.cwd(), 'content/projects')
   const files = await fg('*.mdx', { cwd: projDir })
-  const nodes: any[] = []
-  const links: any[] = []
+  const nodes: GraphNode[] = []
+  const links: GraphLink[] = []
 
   await Promise.all(
     files.map(async (f) => {
@@ -28,17 +44,17 @@ export async function buildGraph() {
   // merge with global graph.yaml
   const gy = await fs.readFile(path.join(process.cwd(), 'content/graph.yaml'), 'utf8')
   const gobj = YAML.parse(gy) || {}
-  ;(gobj.nodes || []).forEach((n: any) => nodes.push(n))
-  ;(gobj.links || []).forEach((l: any) => links.push({ source: l[0], target: l[1] }))
+  ;(gobj.nodes || []).forEach((n: GraphNode) => nodes.push(n))
+  ;(gobj.links || []).forEach((l: [string, string]) => links.push({ source: l[0], target: l[1] }))
 
   // de-dup
-  const uniq = new Map(nodes.map(n => [n.id + ':' + n.kind, n]))
+  const uniq = new Map(nodes.map(node => [`${node.id}:${node.kind}`, node]))
   const n2 = Array.from(uniq.values())
   const seen = new Set<string>()
-  const l2 = links.filter(l => {
-    const k = l.source + '->' + l.target
-    if (seen.has(k)) return false
-    seen.add(k)
+  const l2 = links.filter(link => {
+    const key = `${link.source}->${link.target}`
+    if (seen.has(key)) return false
+    seen.add(key)
     return true
   })
   return { nodes: n2, links: l2 }

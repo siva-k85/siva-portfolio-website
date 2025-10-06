@@ -4,7 +4,11 @@ import NewsletterForm from '@/components/forms/NewsletterForm'
 
 describe('NewsletterForm accessibility', () => {
   beforeAll(() => {
-    global.fetch = jest.fn(() => Promise.resolve({ ok: true, json: async () => ({ ok: true }) })) as any
+    const mockFetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true }),
+    } as Response) as jest.MockedFunction<typeof fetch>
+    global.fetch = mockFetch
   })
 
   it('has no detectable accessibility issues', async () => {

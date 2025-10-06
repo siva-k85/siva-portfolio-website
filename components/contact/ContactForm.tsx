@@ -34,7 +34,7 @@ export default function ContactForm() {
           emailDomain: data.email.split('@')[1] || 'unknown',
         },
       })
-    } catch (err) {
+    } catch {
       setError('Failed to send message. Please try again.')
     } finally {
       setSubmitting(false)
@@ -45,7 +45,7 @@ export default function ContactForm() {
     return (
       <div className="mt-8 rounded-2xl border p-8 text-center">
         <p className="text-lg font-semibold">Thanks for reaching out!</p>
-        <p className="mt-2 opacity-70">I'll get back to you soon.</p>
+        <p className="mt-2 opacity-70">I&rsquo;ll get back to you soon.</p>
       </div>
     )
   }

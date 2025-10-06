@@ -2,10 +2,12 @@
 import cytoscape from 'cytoscape'
 import elk from 'cytoscape-elk'
 import { useEffect, useRef } from 'react'
+import type { GraphData } from '@/lib/graph'
+
 cytoscape.use(elk as any)
 
 interface Graph2DProps {
-  data: any
+  data: GraphData
   focusId?: string | null
 }
 
@@ -15,8 +17,8 @@ export default function Graph2D({ data, focusId }: Graph2DProps) {
   useEffect(()=>{
     if(!ref.current) return
     const elements = [
-      ...data.nodes.map((n:any)=>({ data:{ id:n.id, label:n.id, kind:n.kind } })),
-      ...data.links.map((l:any)=>({ data:{ id:`${l.source}->${l.target}`, source:l.source, target:l.target } }))
+      ...data.nodes.map(node => ({ data: { id: node.id, label: node.id, kind: node.kind } })),
+      ...data.links.map(link => ({ data: { id: `${link.source}->${link.target}`, source: link.source, target: link.target } }))
     ]
     const cy = cytoscape({
       container: ref.current,

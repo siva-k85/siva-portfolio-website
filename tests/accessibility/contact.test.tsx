@@ -4,8 +4,11 @@ import ContactForm from '@/components/contact/ContactForm'
 
 describe('ContactForm accessibility', () => {
   beforeAll(() => {
-    // mock fetch used by the component
-    global.fetch = jest.fn(() => Promise.resolve({ ok: true, json: async () => ({ ok: true }) })) as any
+    const mockFetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true }),
+    } as Response) as jest.MockedFunction<typeof fetch>
+    global.fetch = mockFetch
   })
 
   it('has no detectable accessibility violations', async () => {

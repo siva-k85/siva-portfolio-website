@@ -64,7 +64,7 @@ async function checkPerformanceBudget() {
     report(totalBytes)
     return
   } catch (error) {
-    if (error.code !== 'ENOENT') {
+    if (error && error.code !== 'ENOENT') {
       console.warn('Falling back to legacy build-manifest:', error.message)
     }
   }
@@ -78,7 +78,7 @@ async function checkPerformanceBudget() {
     }
     const totalBytes = await sumChunkSizes(distDir, entry)
     report(totalBytes)
-  } catch (err) {
+  } catch {
     console.error('Unable to locate Next.js build manifests. Run `pnpm build` first.')
   }
 }
