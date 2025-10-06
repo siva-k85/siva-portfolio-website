@@ -30,6 +30,8 @@ export const metadata: Metadata = {
   },
 }
 
+import Provider from './provider'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,21 +49,23 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Healthcare Analytics Notes" />
       </head>
       <body className="relative antialiased">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-gray-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
-          Skip to content
-        </a>
-        <MobileNav />
-        <Header />
-        <main id="main-content" className="min-h-screen bg-[--color-bg]">
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
-        <ScrollToTopButton />
-        <Suspense fallback={null}>
-          <AnalyticsListener />
-        </Suspense>
-        <PerformancePanel />
-        <ServiceWorkerManager />
+        <Provider>
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-gray-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
+            Skip to content
+          </a>
+          <MobileNav />
+          <Header />
+          <main id="main-content" className="min-h-screen bg-[--color-bg]">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+          <ScrollToTopButton />
+          <Suspense fallback={null}>
+            <AnalyticsListener />
+          </Suspense>
+          <PerformancePanel />
+          <ServiceWorkerManager />
+        </Provider>
       </body>
     </html>
   )

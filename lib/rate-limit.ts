@@ -47,7 +47,6 @@ export function getClientId(req: Request): string {
   return `${ip}-${userAgent.substring(0, 50)}`
 }
 
-// Middleware wrapper for API routes
 export async function withRateLimit(
   req: Request,
   handler: (req: Request) => Promise<Response>,
@@ -59,14 +58,32 @@ export async function withRateLimit(
     uniqueTokenPerInterval: 500,
   })
 
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*' as const,
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS' as const,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization' as const,
+  }
+
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
+  }
+
   try {
     const clientId = getClientId(req)
     await limiter.check(limit, clientId)
-    return handler(req)
+    const response = await handler(req)
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+      response.headers.set(key, value)
+    })
+    return response
   } catch {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: 'Too many requests, please try again later.' },
       { status: 429 }
     )
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+      response.headers.set(key, value)
+    })
+    return response
   }
 }

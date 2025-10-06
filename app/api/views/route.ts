@@ -42,7 +42,6 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     const slug = searchParams.get('slug')
-    const type = searchParams.get('type')
 
     if (!slug) {
       // Return all view counts

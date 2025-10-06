@@ -1,10 +1,19 @@
-export default function AdminPage() {
-  // TODO: Add authentication check
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from '@/lib/auth'
+import { redirect } from 'next/navigation'
+
+export default async function AdminPage() {
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    redirect('/api/auth/signin')
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
       <h1 className="text-4xl font-semibold">Admin Dashboard</h1>
       <p className="mt-3 text-base text-gray-600">
-        Welcome to the admin dashboard. This page should be protected.
+        Welcome, {session.user?.name}! This page is protected.
       </p>
     </main>
   )

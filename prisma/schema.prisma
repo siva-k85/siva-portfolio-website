@@ -63,3 +63,11 @@ model ViewCount {
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
+
+model ApiKey {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  name      String
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
