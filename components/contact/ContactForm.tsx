@@ -1,4 +1,5 @@
 'use client'
+import { trackEvent } from '@/lib/analytics'
 import { useState } from 'react'
 
 export default function ContactForm() {
@@ -28,6 +29,11 @@ export default function ContactForm() {
       if (!res.ok) throw new Error('Failed to submit')
 
       setSubmitted(true)
+      trackEvent('contact_form_submission', {
+        props: {
+          emailDomain: data.email.split('@')[1] || 'unknown',
+        },
+      })
     } catch (err) {
       setError('Failed to send message. Please try again.')
     } finally {

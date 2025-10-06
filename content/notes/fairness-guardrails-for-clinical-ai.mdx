@@ -1,0 +1,55 @@
+---
+title: "Fairness Guardrails for Clinical AI Programs"
+summary: "Practical steps to monitor bias from model development through post-deployment drift management."
+tags:
+  - Clinical AI
+  - Model Governance
+  - Healthcare Equity
+  - MLOps
+cover: "/images/notes/clinical-ai-fairness.jpg"
+date: 2024-03-22
+---
+
+Healthcare AI can amplify inequities if fairness controls are an afterthought. Regulatory bodies are converging on stricter guardrails—FDA's proposed regulatory framework, ONC's HTI-2 rule, and state-level AI registries. To stay ahead, we embed fairness checkpoints into every stage of the clinical AI lifecycle.
+
+## 1. Start with Equitable Problem Framing
+
+- **Define success metrics** with patient, clinician, and compliance stakeholders. Include quality-of-life outcomes, not just utilization or cost.
+- **Scenario plan** for harm: What if the model underperforms for Medicaid patients? How will you know quickly?
+
+## 2. Data Profiling & Representation Audits
+
+- Profile datasets by race, ethnicity, language, age, and gender identity.
+- Use tools like `aequitas` or `fairlearn` to quantify representation gaps.
+- Document exclusion criteria meticulously—clinical trials often under-represent key populations.
+
+## 3. Training-Time Bias Mitigation
+
+- Apply reweighting or stratified sampling when groups are underrepresented.
+- Incorporate domain expert review to validate features against known disparities (e.g., creatinine levels vs eGFR by race).
+- Use counterfactual evaluation to test stability of predictions when sensitive attributes change.
+
+## 4. Deployment Guardrails
+
+- Establish a **Fairness Review Board** that approves go-live decisions.
+- Publish model cards summarizing intent, data sources, fairness metrics, and monitoring plans.
+- Implement canary deployments: roll out to a subset of units before system-wide expansion.
+
+## 5. Continuous Monitoring
+
+- Track performance segmented by demographic groups monthly.
+- Set guardrail thresholds (e.g., AUROC parity within ±5%).
+- Trigger retraining or human override protocols when thresholds are breached.
+
+## 6. Communicate Transparently
+
+- Provide clinicians with "why" explanations alongside predictions.
+- Share fairness metrics with patient advocacy councils—build trust through openness.
+
+## What to Watch in 2025
+
+- **OIG audits** of high-risk AI (sepsis, readmissions) will become routine.
+- **Health equity measures** will be tied to reimbursement in CMS programs.
+- **Vendor contracts** must include transparency clauses for fairness metrics.
+
+By treating fairness as a first-class requirement, healthcare analytics leaders can accelerate innovation while honoring ethical obligations to every patient population they serve.

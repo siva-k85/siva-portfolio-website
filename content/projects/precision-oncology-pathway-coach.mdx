@@ -1,0 +1,61 @@
+---
+title: "Precision Oncology Pathway Coach"
+summary: "Clinical decision tool aligned genomic variants with NCCN pathways, reducing time-to-treatment by 36%."
+description: "Clinical decision tool aligned genomic variants with NCCN pathways, reducing time-to-treatment by 36%."
+role:
+  - Product Analytics Lead
+  - Clinical Informatics Partner
+tech:
+  - TypeScript
+  - Next.js
+  - GraphQL
+  - Neo4j
+  - FHIR
+skills:
+  - Oncology Informatics
+  - Knowledge Graphs
+  - UX Research
+  - Clinical Workflow Design
+  - Evidence Synthesis
+repo: ""
+demo: ""
+cover: "/images/projects/precision-oncology.jpg"
+date: 2024-06-01
+featured: false
+---
+
+## Matching Genomic Insights to Actionable Therapies
+
+### Background
+
+The cancer center's tumor board struggled to synthesize genomic panel results, NCCN care pathways, and payer prior authorization rules during weekly meetings. On average it took 19 days to finalize treatment recommendations—delaying therapy initiation.
+
+### Research & Discovery
+
+- Conducted 22 contextual inquiries with oncologists, molecular pathologists, and nurse navigators
+- Mapped end-to-end workflow from biopsy to treatment authorization with service blueprinting
+- Identified 14 recurring data gaps causing rework (e.g., missing clinical trial eligibility flags)
+
+### Data & Architecture
+
+- Built FHIR-based ingestion pipeline for genomic reports, pathology notes, and medication history
+- Modeled 4,800 oncology concepts in Neo4j with relationships to guidelines, biomarkers, and available trials
+- Exposed a GraphQL API with query resolvers optimized for tumor board questions
+
+### Experience Design
+
+- Created pathway overlays that show evidence tiers, FDA labels, and prior auth requirements in a single view
+- Generated auto-drafted tumor board summaries with inline citations for regulatory compliance
+- Added patient-friendly education modules exported to the patient portal via SMART-on-FHIR
+
+### Impact
+
+- **36% faster** time-to-treatment start (median reduced from 19 to 12 days)
+- **18% fewer** prior-authorization denials by embedding payer policies at decision time
+- **100% adoption** by tumor board physicians within first 2 months
+- Recognized by HIMSS 2025 Innovation Showcase for clinical decision support excellence
+
+### Expansion
+
+- Extending ontology to include survivorship care plans
+- Training nurse navigators on shared-decision documentation templates

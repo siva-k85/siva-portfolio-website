@@ -1,0 +1,61 @@
+---
+title: "Sepsis Command Center"
+summary: "Real-time physiologic monitoring cut sepsis mortality by 14% while automating CMS SEP-1 reporting."
+description: "Real-time physiologic monitoring cut sepsis mortality by 14% while automating CMS SEP-1 reporting."
+role:
+  - Lead Data Engineer
+  - Clinical AI Strategist
+tech:
+  - Python
+  - Apache Kafka
+  - TimescaleDB
+  - React
+  - Grafana
+skills:
+  - Streaming Analytics
+  - Clinical Surveillance
+  - Alert Fatigue Mitigation
+  - Quality Reporting
+  - Change Management
+repo: ""
+demo: ""
+cover: "/images/projects/sepsis-command-center.jpg"
+date: 2024-08-20
+featured: true
+---
+
+## Coordinated Sepsis Response in Under One Minute
+
+### Challenge
+
+Four hospitals across the system missed CMS SEP-1 benchmarks for three consecutive quarters. Existing EHR alerts created alarm fatigue and lacked cross-unit visibility, causing interventions to be delayed beyond the Golden Hour.
+
+### Architecture
+
+1. **Signal Ingestion**
+   - Streamed 120 physiologic signals per bed from bedside monitors via HL7
+   - Captured hourly vitals, labs, and nursing notes through FHIR Subscriptions
+   - Normalized feeds in Kafka with schema registry enforcement
+
+2. **Risk Scoring Pipeline**
+   - Developed ensemble model combining NEWS2, qSOFA, and gradient boosting with SHAP transparency
+   - Maintained feature store in TimescaleDB with 5-second temporal resolution
+   - Tuned for 92% sensitivity and 15-minute early warning horizon
+
+3. **Command Center UX**
+   - Built React dashboard with hospital-wide heat maps, unit-level cohorts, and clinician routing workflows
+   - Embedded clinical checklists aligned to Surviving Sepsis Campaign protocols
+   - Integrated Responder mobile app push notifications using Firebase Cloud Messaging
+
+### Outcomes
+
+- **14% reduction** in sepsis mortality during 6-month pilot across 4 hospitals
+- **9.3-hour faster** bundle completion time compared to baseline
+- **52% fewer** false-positive alerts through adaptive thresholding
+- Automated CMS SEP-1 reporting, eliminating 40 analyst hours per month
+
+### Sustainability
+
+- Established command center staffing model with critical care nurses and quality analysts
+- Published success metrics in AMIA Clinical Informatics Conference proceedings
+- Built executive dashboard tracking ROI, bed capacity, and clinical throughput

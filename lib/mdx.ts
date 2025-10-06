@@ -8,16 +8,18 @@ const notesDirectory = path.join(process.cwd(), 'content/notes')
 export interface Project {
   slug: string
   title: string
+  summary: string
   description: string
   date: string
   technologies?: string[]
-  metrics?: any
+  metrics?: Record<string, unknown>
   content?: string
 }
 
 export interface Note {
   slug: string
   title: string
+  summary: string
   description: string
   date: string
   tags?: string[]
@@ -38,10 +40,12 @@ export async function getProjects(): Promise<Project[]> {
       const fileContents = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContents)
 
+      const summary = data.summary || data.description || ''
       return {
         slug,
         title: data.title || slug,
-        description: data.description || '',
+        summary,
+        description: data.description || summary,
         date: data.date || new Date().toISOString(),
         technologies: data.technologies || [],
         metrics: data.metrics || {}
@@ -62,10 +66,12 @@ export async function getProject(slug: string): Promise<Project | null> {
   const fileContents = fs.readFileSync(filePath, 'utf8')
   const { data, content } = matter(fileContents)
 
+  const summary = data.summary || data.description || ''
   return {
     slug,
     title: data.title || slug,
-    description: data.description || '',
+    summary,
+    description: data.description || summary,
     date: data.date || new Date().toISOString(),
     technologies: data.technologies || [],
     metrics: data.metrics || {},
@@ -87,10 +93,12 @@ export async function getNotes(): Promise<Note[]> {
       const fileContents = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContents)
 
+      const summary = data.summary || data.description || ''
       return {
         slug,
         title: data.title || slug,
-        description: data.description || '',
+        summary,
+        description: data.description || summary,
         date: data.date || new Date().toISOString(),
         tags: data.tags || []
       }
@@ -110,10 +118,12 @@ export async function getNote(slug: string): Promise<Note | null> {
   const fileContents = fs.readFileSync(filePath, 'utf8')
   const { data, content } = matter(fileContents)
 
+  const summary = data.summary || data.description || ''
   return {
     slug,
     title: data.title || slug,
-    description: data.description || '',
+    summary,
+    description: data.description || summary,
     date: data.date || new Date().toISOString(),
     tags: data.tags || [],
     content

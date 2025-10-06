@@ -1,6 +1,11 @@
-import { Person, WithContext } from 'schema-dts'
+'use client'
+import { Person, WebSite, Article, CreativeWork, WithContext } from 'schema-dts'
+import { usePathname } from 'next/navigation'
 
 export default function JsonLd() {
+  const pathname = usePathname()
+
+  // Base Person Schema
   const personSchema: WithContext<Person> = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -23,6 +28,12 @@ export default function JsonLd() {
       'Data Engineering',
       'Product Management',
       'Cloud Architecture',
+      'Clinical Informatics',
+      'HIPAA Compliance',
+      'Epic EHR',
+      'Python',
+      'SQL',
+      'TypeScript'
     ],
     worksFor: {
       '@type': 'Organization',
@@ -30,10 +41,67 @@ export default function JsonLd() {
     },
   }
 
+  // Website Schema
+  const websiteSchema: WithContext<WebSite> = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Siva Komaragiri Portfolio',
+    url: 'https://sivakomaragiri.com',
+    author: personSchema,
+    description: 'Portfolio showcasing healthcare analytics projects, AI systems, and data engineering work.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://sivakomaragiri.com/search?q={search_term_string}'
+      },
+      'query-input': 'required name=search_term_string'
+    }
+  }
+
+  // Article Schema for blog posts
+  const articleSchema: WithContext<Article> | null = pathname?.startsWith('/notes/') ? {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Healthcare Analytics Insights',
+    author: personSchema,
+    publisher: personSchema,
+    datePublished: new Date().toISOString(),
+    dateModified: new Date().toISOString(),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://sivakomaragiri.com${pathname}`
+    }
+  } : null
+
+  // Project/Portfolio Schema
+  const portfolioSchema: WithContext<CreativeWork> | null = pathname?.startsWith('/projects/') ? {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: 'Healthcare Analytics Project',
+    author: personSchema,
+    url: `https://sivakomaragiri.com${pathname}`,
+    datePublished: new Date().toISOString(),
+    description: 'Healthcare analytics and AI system implementation'
+  } : null
+
+  // Combine schemas
+  const schemas = [
+    personSchema,
+    websiteSchema,
+    articleSchema,
+    portfolioSchema
+  ].filter(Boolean)
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-    />
+    <>
+      {schemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
   )
 }

@@ -1,0 +1,50 @@
+---
+title: "Building Trust with Healthcare Data Governance"
+summary: "A roadmap for launching a clinical analytics governance council that clinicians actually support."
+tags:
+  - Data Governance
+  - Healthcare Analytics
+  - Change Management
+  - Compliance
+cover: "/images/notes/data-governance.jpg"
+date: 2024-01-30
+---
+
+Analytics leaders often inherit fragmented data ownership, inconsistent metric definitions, and compliance anxiety. Without governance, dashboards breed disagreement instead of action. Here’s how we established a governance program that clinicians and executives embraced.
+
+## Establish a Clinician-Led Council
+
+- Recruit medical directors, nursing leaders, quality officers, and informatics team members.
+- Define a charter prioritizing patient safety, regulatory compliance (HIPAA, CMS), and operational reliability.
+- Rotate chair roles every six months to keep engagement high.
+
+## Inventory Critical Metrics
+
+We audited 126 dashboards and scorecards to classify metrics:
+
+- **Regulatory** (SEP-1, HCAHPS, readmissions)
+- **Operational** (LOS, throughput, staffing ratios)
+- **Financial** (contribution margin, contract performance)
+
+Each metric received a data steward, definition, calculation logic, and refresh schedule stored in a Confluence data dictionary.
+
+## Implement Guardrails
+
+- **Access**: RBAC via Azure AD groups, least privilege enforced.
+- **Quality**: dbt tests for null thresholds, referential integrity, and outlier detection.
+- **Lineage**: Automated lineage maps with Monte Carlo to trace upstream changes.
+- **Incident Response**: PagerDuty escalation when data SLA breaches occur.
+
+## Communicate Transparently
+
+- Weekly digest summarizing metric changes, incidents, and upcoming releases.
+- Clinician open-hours to demo new analytics tools and gather feedback.
+- Quarterly governance report to the executive council with adoption and reliability metrics.
+
+## Impact
+
+- Reduced conflicting KPI debates in steering committees by 63%.
+- Cut ad-hoc analytics requests by 47% through self-serve catalog adoption.
+- Passed external HIPAA and SOC 2 audits with zero major findings.
+
+Governance is not bureaucracy—it is how healthcare organizations build trust in analytics so teams can move faster with confidence.

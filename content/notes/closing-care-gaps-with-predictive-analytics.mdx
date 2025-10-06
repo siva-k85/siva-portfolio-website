@@ -1,0 +1,61 @@
+---
+title: "Closing Care Gaps with Predictive Analytics"
+summary: "How we combined risk modeling and clinician workflows to close 18K preventive care gaps in 9 months."
+tags:
+  - Healthcare Analytics
+  - Population Health
+  - Predictive Modeling
+  - Quality Improvement
+cover: "/images/notes/care-gaps.jpg"
+date: 2024-07-02
+---
+
+Preventive care performance is one of the clearest signals of a health system’s population health maturity. Yet most organizations still rely on static spreadsheets emailed monthly to physicians. This article outlines the architecture and change management required to make care gap closure proactive, accountable, and measurable.
+
+## Understand the Clinical Reality
+
+Care gaps are not just data entries—they represent overdue screenings, chronic disease monitoring, and immunizations. We interviewed 32 clinicians and care managers across primary care and cardiology to map why gaps persist. Four root causes emerged:
+
+1. **Fragmented Data**: Lab results, claims, and external referrals lived in different systems.
+2. **Unclear Ownership**: No one knew whether PCPs, specialists, or care managers should act.
+3. **Timing Mismatch**: Lists were delivered weeks after visits occurred.
+4. **Misaligned Incentives**: Clinicians did not see direct impact on panel outcomes or compensation.
+
+## Data & Modeling Pipeline
+
+We built a Snowflake + dbt pipeline that ingested:
+
+- Condition registries (diabetes, hypertension, COPD)
+- Lab results and vital signs (including external interfaces via CCD)
+- Payer claims for mammography, colonoscopy, and vaccinations
+- Social determinants data from PRAPARE assessments
+
+Each patient received a **Care Gap Priority Score** combining:
+
+- Risk of adverse event within 12 months (XGBoost model)
+- Likelihood of appointment attendance (gradient boosting on visit history)
+- Equity modifier capturing social vulnerability index
+
+## Operationalizing Insights
+
+Instead of overwhelming clinicians with lists, we:
+
+- Embedded gap insights directly inside the EHR visit navigator
+- Auto-generated outreach queues for the centralized contact center
+- Triggered visit prep checklists for medical assistants 48 hours before appointments
+- Displayed panel-level performance in weekly huddles
+
+## Measuring Impact
+
+- **18,240 care gaps** closed in 9 months (41% improvement YoY)
+- **12% reduction** in diabetes-related ED visits due to tighter monitoring
+- **Tobacco cessation counseling** compliance rose from 52% to 81%
+- Clinician satisfaction with gap management tools increased from 2.3 to 4.4 / 5
+
+## Lessons Learned
+
+1. **Create Shared Ownership**: Joint KPIs across physicians, nurses, and outreach teams keep momentum.
+2. **Audit for Equity**: Track closure rates by race, ethnicity, and language to ensure interventions are inclusive.
+3. **Automate Documentation**: Auto-closing gaps when structured data arrives prevents clerical burden.
+
+Healthcare analytics succeeds when it reshapes workflows, not just dashboards. Closing care gaps requires both predictive horsepower and human-centered design.

@@ -1,0 +1,65 @@
+---
+title: "Value-Based Care Contract Optimization"
+summary: "Financial risk modeling platform aligned payor contracts with clinical outcomes, unlocking $6.7M in shared savings."
+description: "Financial risk modeling platform aligned payor contracts with clinical outcomes, unlocking $6.7M in shared savings."
+role:
+  - Principal Data Scientist
+  - Product Strategist
+tech:
+  - Python
+  - dbt
+  - Snowflake
+  - Tableau
+  - Dagster
+skills:
+  - Risk Adjustment
+  - Predictive Modeling
+  - Healthcare Finance
+  - ETL Orchestration
+  - Executive Storytelling
+repo: ""
+demo: ""
+cover: "/images/projects/value-based-care.jpg"
+date: 2024-07-10
+featured: true
+---
+
+## Rebuilding Shared-Savings Strategy for ACO Partners
+
+### Problem
+
+The health system entered 5 new value-based care agreements without a robust understanding of downside risk. Their actuarial vendor delivered static reports that arrived six weeks late, preventing clinical teams from intervening on rising-risk populations.
+
+### Approach
+
+#### Data Foundation
+- Ingested 3.2 TB of claims, EHR encounters, lab panels, and social determinant feeds into Snowflake
+- Applied CMS-HCC v28 for prospective risk adjustment
+- Modeled 1.1 million patient-months with condition hierarchy rollups
+
+#### Risk Engine
+- Built segmented gradient boosting models to forecast avoidable admissions and chronic condition exacerbations
+- Layered propensity scoring to simulate payor benchmarks and shared savings targets
+- Created contract-specific Monte Carlo scenarios to show best / base / worst financial outcomes
+
+#### Operationalization
+- Orchestrated incremental fact tables with Dagster and dbt
+- Deployed Tableau scorecards with cohort drill-downs by practice, physician, and payor contract
+- Triggered weekly outreach lists through Salesforce Care Management
+
+### Outcomes
+
+- **$6.7M** projected shared savings for contract year 1 (confirmed by payor actuarial true-up)
+- **28% reduction** in avoidable admissions for top 5 risk segments
+- **21-day faster** insight delivery versus previous vendor reports
+- Clinicians adopted daily dashboards (82% weekly active users across 14 clinics)
+
+### Lessons Learned
+
+- Pair financial modeling with clinical insights; revenue teams alone could not drive action
+- Versioned scenario planning ensured executives trusted model transparency
+
+### Next Steps
+
+- Integrate pharmacy rebates and remote patient monitoring feeds
+- Extend risk explainability to patient-facing care navigation portal

@@ -1,0 +1,64 @@
+---
+title: "Designing Measurement Systems for Value-Based Care"
+summary: "A measurement playbook for finance, clinical, and analytics teams managing downside risk contracts."
+tags:
+  - Value-Based Care
+  - Healthcare Finance
+  - Analytics Strategy
+  - Data Governance
+cover: "/images/notes/value-based-care.jpg"
+date: 2024-05-18
+---
+
+Shifting from fee-for-service to value-based care is a socio-technical transformation. The analytics team must become a connective tissue between actuarial modeling, front-line care delivery, and executive decision-making. Here is the measurement framework we used when our system expanded from two upside-only contracts to seven downside risk agreements in a single fiscal year.
+
+## Build a Shared Contract Library
+
+Start by codifying every contract term in a structure everyone can query:
+
+- Attribution logic (prospective vs retrospective)
+- Benchmark methodology (regional, national, historical, blended)
+- Risk corridors and stop-loss thresholds
+- Quality withholds and bonus multipliers
+
+We stored each element in a dbt semantic layer, enabling analysts and finance to generate identical numbers. Contract assumptions were version-controlled, dramatically reducing spreadsheet drift.
+
+## Align Clinical Measures with Financial Outcomes
+
+For each contract, map which quality measures influence financial performance. For example:
+
+- **Hypertension Control** → Impacts shared savings by lowering avoidable ED utilization.
+- **Depression Screening** → Tied to quality withhold release.
+- **30-Day Readmissions** → Downside risk trigger.
+
+Create measure owner playbooks describing:
+
+- Data sources and refresh cadence
+- Operational levers (care management outreach, visit scripting, remote monitoring)
+- Thresholds for escalating to executive review
+
+## Build Rolling Forecasts, Not Static Reports
+
+Executives need to know whether current performance puts the system on track for savings or penalties. We built a rolling 12-month forecast model that:
+
+- Combines historical performance, current month trends, and leading indicators (e.g., chronic disease panel risk scores)
+- Simulates financial outcomes based on active interventions (telehealth expansion, staffing changes)
+- Surfaces the highest ROI opportunities with projected savings and effort scores
+
+## Establish a Governance Rhythm
+
+Analytics created a monthly "contract performance council" with leaders from finance, operations, and population health:
+
+1. **Highlights**: Contracts beating benchmarks, quantify savings.
+2. **Watchlist**: Measures trending downward with root cause hypotheses.
+3. **Decisions**: Resources allocated, policy changes, payer negotiations.
+
+Decisions were captured in Jira to track closure and impact.
+
+## Lessons for Analytics Leaders
+
+1. **Context is Everything**: Analysts must understand clinical workflow, not just SQL.
+2. **Transparency Builds Trust**: Publish assumptions and methodologies; explain variance drivers in plain language.
+3. **Change Management Matters**: Analytics insights only matter if operational leaders can act on them.
+
+Value-based care success requires analytics teams to become strategic partners, translating data into decisions that clinicians and executives trust.

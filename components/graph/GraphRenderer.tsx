@@ -17,7 +17,12 @@ function supportsWebGL() {
   }
 }
 
-export default function GraphRenderer({ data }: { data: any }) {
+interface GraphRendererProps {
+  data: any
+  focusId?: string | null
+}
+
+export default function GraphRenderer({ data, focusId }: GraphRendererProps) {
   const [render3D, setRender3D] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -44,5 +49,5 @@ export default function GraphRenderer({ data }: { data: any }) {
     )
   }
 
-  return render3D ? <Graph3D data={data} /> : <Graph2D data={data} />
+  return render3D ? <Graph3D data={data} focusId={focusId} /> : <Graph2D data={data} focusId={focusId} />
 }

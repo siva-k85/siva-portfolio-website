@@ -1,0 +1,47 @@
+---
+title: "Operationalizing Sepsis Alerts Without Burning Out Clinicians"
+summary: "Framework for building a sepsis surveillance program that clinicians trust and quality teams can defend."
+tags:
+  - Clinical AI
+  - Sepsis
+  - Quality Improvement
+  - Change Management
+cover: "/images/notes/sepsis-alerts.jpg"
+date: 2024-09-12
+---
+
+Sepsis is one of the most litigated and scrutinized hospital conditions. Surviving Sepsis Campaign guidelines are clear, but execution requires orchestrating physicians, nurses, pharmacists, and lab techs in under an hour. Analytics teams often focus on the predictive model and forget the operational load it creates. Here's how we launched a sepsis command center with sustained adoption.
+
+## Start with Baselines and Failure Modes
+
+Before writing code, we:
+
+- Audited 80 recent sepsis cases to understand clinical decision points
+- Ran failure mode and effects analysis (FMEA) with ICU, ED, and hospitalist teams
+- Quantified alert fatigue—nurses received an average of 67 sepsis-related alerts per shift
+
+## Model Design Principles
+
+1. **Explainability**: We combined traditional scores (NEWS2, qSOFA) with gradient boosting features, then surfaced SHAP insights in the UI.
+2. **Temporal Context**: Signals at 5-minute granularity prevented stale alerts.
+3. **Equity Review**: Ran fairness analysis by age, sex, race, and comorbidity clusters; adjusted alert thresholds to prevent under-calling sepsis in older adults.
+
+## Workflow Integration
+
+- Embedded alerts into a command center staffed by critical care nurses.
+- Created role-based task lists: Rapid Response Team handles bedside evaluation, pharmacists prep broad-spectrum antibiotics, lab prioritizes lactate draws.
+- Added "pause" functionality so teams can snooze alerts while stabilizing patients.
+
+## Measuring Success
+
+- **14% mortality reduction** across 4 hospitals within 6 months.
+- **52% fewer false positives** by contextualizing alerts with ventilator settings and trending vitals.
+- Automated CMS SEP-1 documentation through structured checklists.
+
+## Sustainment Strategies
+
+1. **Case Review Cadence**: Weekly huddles using analytics dashboards to review true/false alerts.
+2. **Feedback Loop**: Clinicians tagged each alert outcome, feeding active learning retraining cycles.
+3. **Transparent Metrics**: Dashboards showed interventions triggered and time-to-antibiotics by unit.
+
+Predictive models do not save lives on their own. Trustworthy clinical AI must respect workflow, provide transparency, and earn adoption every day.

@@ -1,37 +1,24 @@
-'use client'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { listProjects } from '@/lib/content'
+import ProjectCard from '@/components/projects/ProjectCard'
 
-export default function ProjectsGrid({ limit }: { limit?: number }) {
-  const [projects, setProjects] = useState<any[]>([])
+interface ProjectsGridProps {
+  limit?: number
+  projects?: Awaited<ReturnType<typeof listProjects>>
+  emptyMessage?: string
+}
 
-  useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => setProjects(data))
-      .catch(console.error)
-  }, [])
+export default async function ProjectsGrid({ limit, projects, emptyMessage = 'Projects coming soon.' }: ProjectsGridProps) {
+  const data = projects ?? (await listProjects())
+  const items = limit ? data.slice(0, limit) : data
 
-  const displayProjects = limit ? projects.slice(0, limit) : projects
+  if (items.length === 0) {
+    return <p className="mt-8 text-center text-sm text-gray-500">{emptyMessage}</p>
+  }
 
   return (
     <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {displayProjects.map(project => (
-        <Link
-          key={project.slug}
-          href={`/projects/${project.slug}`}
-          className="group rounded-2xl border p-6 transition-all hover:shadow-lg"
-        >
-          <h3 className="text-xl font-semibold">{project.title}</h3>
-          <p className="mt-2 text-sm opacity-70">{project.description}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.technologies?.slice(0, 3).map((tech: string) => (
-              <span key={tech} className="text-xs rounded-full bg-gray-100 px-2 py-1">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </Link>
+      {items.map(project => (
+        <ProjectCard key={project.slug} project={project} />
       ))}
     </div>
   )
