@@ -1,0 +1,36 @@
+runConfig:
+  minInstances: 0
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+env:
+  - variable: CLOUDSQL_INSTANCE
+    secret: CLOUDSQL_INSTANCE
+    availability: [RUNTIME]
+  - variable: DB_USER
+    secret: DB_USER
+    availability: [RUNTIME]
+  - variable: DB_PASS
+    secret: DB_PASS
+    availability: [RUNTIME]
+  - variable: DB_NAME
+    secret: DB_NAME
+    availability: [RUNTIME]
+  - variable: RESEND_API_KEY
+    secret: RESEND_API_KEY
+    availability: [RUNTIME]
+  - variable: RECAPTCHA_PROJECT_ID
+    secret: RECAPTCHA_PROJECT_ID
+    availability: [RUNTIME]
+  - variable: RECAPTCHA_SITE_KEY
+    secret: RECAPTCHA_SITE_KEY
+    availability: [RUNTIME]
+  - variable: RECAPTCHA_API_KEY
+    secret: RECAPTCHA_API_KEY
+    availability: [RUNTIME]
+  - variable: SENTRY_DSN
+    secret: SENTRY_DSN
+    availability: [RUNTIME]
+  - variable: PLAUSIBLE_DOMAIN
+    value: example.com
+    availability: [RUNTIME]

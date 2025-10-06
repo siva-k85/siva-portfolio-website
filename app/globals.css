@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: ui-sans-serif, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  --color-bg: oklch(98% 0.01 95);
+  --color-fg: oklch(18% 0.02 270);
+  --color-accent: oklch(62% 0.14 250);
+  --radius: 1.25rem;
+}
+html { color-scheme: light dark; }
+body { @apply bg-[--color-bg] text-[--color-fg] antialiased; }
