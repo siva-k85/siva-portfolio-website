@@ -1,0 +1,42 @@
+---
+title: "CMU UHS Insurance Query Chatbot (RAG/LLM)"
+summary: "LangChain + Vertex AI + FAISS; cut FAQ response time 60% and saved $150K annually."
+role: ["Architect","LLM Engineer","Data Scientist"]
+tech: ["LangChain","Vertex AI","GCP","FAISS","Python","LLaMA-2 7b"]
+skills: ["RAG","LLM Deployment","Cost Optimization","Generative AI","Policy Analysis"]
+repo: "https://github.com/SivaK85/CMU-UHS-Chatbot"
+demo: "https://cmu-insurance-chatbot.com"
+cover: "/images/projects/chatbot-cover.jpg"
+date: 2024-09-15
+featured: true
+---
+## Overview
+
+Designed and implemented a RAG-based chatbot system for CMU's University Health Services to handle insurance policy queries. The system leverages LangChain for orchestration, Vertex AI for hosting, and FAISS for efficient vector retrieval.
+
+## Architecture
+
+### Core Components
+- **Retrieval Engine**: FAISS vector database with 10K+ policy documents
+- **LLM Pipeline**: Fine-tuned LLaMA-2 7b model with custom prompts
+- **Orchestration**: LangChain for chain-of-thought reasoning
+- **Hosting**: GCP Vertex AI with auto-scaling endpoints
+
+## Implementation Details
+
+### Document Processing
+- Chunked policy documents into semantic sections
+- Generated embeddings using sentence-transformers
+- Implemented hybrid search (semantic + keyword)
+
+### Guardrails
+- Content filtering for PHI/PII
+- Response validation against policy database
+- Hallucination detection using consistency checks
+
+## Results
+
+- **Response Time**: 60% reduction in average query resolution
+- **Cost Savings**: $150K annually in support costs
+- **Accuracy**: 94% correct responses in user testing
+- **User Satisfaction**: 4.7/5 rating from 500+ users

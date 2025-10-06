@@ -1,0 +1,19 @@
+nodes:
+  - { id: "Python", kind: "tech", score: 5.0 }
+  - { id: "GCP", kind: "tech", score: 4.5 }
+  - { id: "Healthcare Analytics", kind: "skill", score: 5.0 }
+  - { id: "Product Management", kind: "skill", score: 4.0 }
+  - { id: "NLP", kind: "skill", score: 4.0 }
+  - { id: "Optimization", kind: "skill", score: 3.5 }
+  - { id: "Quantiphi Client Solutions", kind: "project", score: 4.0 }
+  - { id: "Fractal/Qure.Ai", kind: "project", score: 3.0 }
+links:
+  - ["Python","Healthcare Analytics"]
+  - ["GCP","Healthcare Analytics"]
+  - ["Python","NLP"]
+  - ["Healthcare Analytics","Product Management"]
+  - ["Optimization","Quantiphi Client Solutions"]
+  - ["NLP","Quantiphi Client Solutions"]
+  - ["Python","Quantiphi Client Solutions"]
+  - ["Healthcare Analytics","Fractal/Qure.Ai"]
+  - ["Python","Fractal/Qure.Ai"]

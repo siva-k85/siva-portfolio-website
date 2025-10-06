@@ -1,8 +1,10 @@
 runConfig:
   minInstances: 0
+  maxInstances: 5
   concurrency: 80
   cpu: 1
   memoryMiB: 512
+
 env:
   - variable: CLOUDSQL_INSTANCE
     secret: CLOUDSQL_INSTANCE
@@ -16,6 +18,9 @@ env:
   - variable: DB_NAME
     secret: DB_NAME
     availability: [RUNTIME]
+  - variable: DATABASE_URL
+    secret: DATABASE_URL
+    availability: [BUILD, RUNTIME]
   - variable: RESEND_API_KEY
     secret: RESEND_API_KEY
     availability: [RUNTIME]
@@ -32,5 +37,11 @@ env:
     secret: SENTRY_DSN
     availability: [RUNTIME]
   - variable: PLAUSIBLE_DOMAIN
-    value: example.com
+    value: analytics.sivakomaragiri.com
     availability: [RUNTIME]
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://sivakomaragiri.com
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_CALENDLY_URL
+    value: https://calendly.com/siva-komaragiri
+    availability: [BUILD, RUNTIME]

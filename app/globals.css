@@ -1,10 +1,27 @@
-@import "tailwindcss";
-@theme {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
   --font-sans: ui-sans-serif, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
   --color-bg: oklch(98% 0.01 95);
   --color-fg: oklch(18% 0.02 270);
   --color-accent: oklch(62% 0.14 250);
   --radius: 1.25rem;
 }
-html { color-scheme: light dark; }
-body { @apply bg-[--color-bg] text-[--color-fg] antialiased; }
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-[--color-bg] text-[--color-fg] antialiased;
+}
+
+a {
+  @apply underline-offset-4 hover:underline;
+}
+
+button {
+  @apply rounded-2xl;
+}

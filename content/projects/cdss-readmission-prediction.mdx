@@ -1,0 +1,65 @@
+---
+title: "Clinical Decision Support — Readmission Prediction"
+summary: "Gradient Boosting-based CDSS reached 87% accuracy; dashboard for clinicians."
+role: ["Data Scientist","Researcher","Analyst"]
+tech: ["Python","Gradient Boosting","Tableau","Stats"]
+skills: ["Machine Learning","Healthcare Policy","Visualization","Risk Stratification","CDSS"]
+repo: "https://github.com/SivaK85/Readmission-CDSS"
+demo: ""
+cover: "/images/projects/cdss-cover.jpg"
+date: 2024-05-15
+featured: false
+---
+## Building a Clinical Decision Support System for Readmission Risk
+
+### Background
+
+Hospital readmissions within 30 days cost Medicare $26 billion annually. Early identification of high-risk patients enables targeted interventions.
+
+### Methodology
+
+#### Data Sources
+- **EHR Data**: 50,000 patient records from 2019-2023
+- **Features**: Demographics, diagnoses, medications, vitals, lab results, social determinants
+- **Target**: 30-day unplanned readmission (binary)
+
+#### Model Development
+
+1. **Feature Engineering**
+   - Comorbidity indices (Charlson, Elixhauser)
+   - Medication complexity scores
+   - Social vulnerability index
+   - Previous admission patterns
+
+2. **Model Selection**
+   - Tested: Logistic Regression, Random Forest, XGBoost, Neural Networks
+   - Winner: Gradient Boosting (XGBoost) with 87% AUC
+
+3. **Interpretability**
+   - SHAP values for feature importance
+   - Individual risk factor decomposition
+   - Clinician-friendly explanations
+
+### Implementation
+
+#### Dashboard Features
+- **Risk Score**: 0-100 scale with confidence intervals
+- **Key Drivers**: Top 5 factors contributing to risk
+- **Interventions**: Evidence-based recommendations
+- **Trends**: Risk trajectory over admission
+
+#### Integration
+- RESTful API for EHR integration
+- Real-time scoring at admission and discharge
+- Daily batch processing for inpatients
+
+### Results
+
+- **Accuracy**: 87% AUC, 82% sensitivity at 70% specificity
+- **Impact**: 18% reduction in readmissions for high-risk cohort
+- **ROI**: $1.2M saved in penalties first year
+- **Adoption**: Used by 85% of discharge planners
+
+### Publications
+
+Presented findings at Healthcare Analytics Summit 2024
