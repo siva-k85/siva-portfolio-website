@@ -1,5 +1,11 @@
 import { listNotes } from '@/lib/content'
 import NotesExplorer from '@/components/notes/NotesExplorer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Healthcare Analytics Notes - Siva Komaragiri',
+  description: 'Field-tested frameworks for closing care gaps, governing AI, and scaling value-based care.',
+}
 
 export const dynamic = 'force-static'
 

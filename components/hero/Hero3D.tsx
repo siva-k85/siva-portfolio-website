@@ -35,6 +35,11 @@ function Particles({ quality = 'high' }: Hero3DProps) {
 }
 
 export default function Hero3D({ quality = 'high' }: Hero3DProps) {
+  const ambientLight = useMemo(
+    () => new THREE.AmbientLight('#1f2937', quality === 'high' ? 0.5 : 0.35),
+    [quality]
+  )
+
   return (
     <Canvas
       camera={{ position: [0, 0, 12], fov: 45 }}
@@ -42,7 +47,8 @@ export default function Hero3D({ quality = 'high' }: Hero3DProps) {
       dpr={[1, 2]}
       frameloop="always"
     >
-      <ambientLight intensity={0.4} />
+      {/* @ts-expect-error primitive is provided by @react-three/fiber */}
+      <primitive object={ambientLight} />
       <Particles quality={quality} />
     </Canvas>
   )

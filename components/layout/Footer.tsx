@@ -52,4 +52,3 @@ export default function Footer() {
     </footer>
   )
 }
-import NewsletterForm from '@/components/forms/NewsletterForm'

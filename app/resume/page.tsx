@@ -1,5 +1,11 @@
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import ATSResumeBlock from '@/components/about/ATSResumeBlock'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Resume - Siva Komaragiri',
+  description: 'Download my resume and see my credentials.',
+}
 
 export default function Resume() {
   return (

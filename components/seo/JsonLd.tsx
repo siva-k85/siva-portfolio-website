@@ -42,7 +42,7 @@ export default function JsonLd() {
   }
 
   // Website Schema
-  const websiteSchema: WithContext<WebSite> = {
+  const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Siva Komaragiri Portfolio',
@@ -57,7 +57,7 @@ export default function JsonLd() {
       },
       'query-input': 'required name=search_term_string'
     }
-  }
+  } as unknown as WithContext<WebSite>
 
   // Article Schema for blog posts
   const articleSchema: WithContext<Article> | null = pathname?.startsWith('/notes/') ? {

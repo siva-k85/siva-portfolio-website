@@ -36,7 +36,7 @@ export default async function SearchPage({
     ? notes.filter(note =>
         matchesQuery(note.title, query) ||
         matchesQuery(note.summary, query) ||
-        matchesQuery(note.tags, query)
+        matchesQuery((note as any).tags, query)
       )
     : []
 

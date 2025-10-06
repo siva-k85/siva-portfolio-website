@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 import JsonLd from '@/components/seo/JsonLd'
 import Header from '@/components/navigation/Header'
@@ -56,7 +57,9 @@ export default function RootLayout({
         </main>
         <Footer />
         <ScrollToTopButton />
-        <AnalyticsListener />
+        <Suspense fallback={null}>
+          <AnalyticsListener />
+        </Suspense>
         <PerformancePanel />
         <ServiceWorkerManager />
       </body>

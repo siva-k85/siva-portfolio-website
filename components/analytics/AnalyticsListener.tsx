@@ -17,7 +17,7 @@ export default function AnalyticsListener() {
 
     let isMounted = true
 
-    import('web-vitals').then(({ onCLS, onFID, onLCP }) => {
+    import('web-vitals').then(({ onCLS, onINP, onLCP }) => {
       if (!isMounted) return
 
       const sendMetric = ({ name, value, rating }: { name: string; value: number; rating: string }) => {
@@ -38,7 +38,7 @@ export default function AnalyticsListener() {
       }
 
       onCLS(sendMetric)
-      onFID(sendMetric)
+      onINP(sendMetric)
       onLCP(sendMetric)
     })
 

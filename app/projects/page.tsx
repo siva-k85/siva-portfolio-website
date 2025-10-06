@@ -1,5 +1,11 @@
 import { listProjects } from '@/lib/content'
 import ProjectsExplorer from '@/components/projects/ProjectsExplorer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Projects - Siva Komaragiri',
+  description: 'Detailed case studies covering clinical quality, value-based care, operational transformation, and AI safety.',
+}
 
 export const dynamic = 'force-static'
 

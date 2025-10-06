@@ -1,5 +1,11 @@
 import { buildGraph } from '@/lib/graph'
 import GraphRenderer from '@/components/graph/GraphRenderer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Knowledge Graph - Siva Komaragiri',
+  description: 'A 3D visualization of my skills, projects, and experiences.',
+}
 
 export const dynamic = 'force-static'
 

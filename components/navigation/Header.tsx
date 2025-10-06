@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import type { Route } from 'next'
 import { usePathname } from 'next/navigation'
 
 const navItems = [
@@ -10,7 +11,7 @@ const navItems = [
   { href: '/about', label: 'About' },
   { href: '/search', label: 'Search' },
   { href: '/resume', label: 'Résumé' },
-]
+] satisfies { href: Route; label: string }[]
 
 export default function Header() {
   const pathname = usePathname()
@@ -27,7 +28,7 @@ export default function Header() {
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={item.href as any}
                 className={`rounded-2xl px-4 py-2 transition ${
                   isActive ? 'bg-gray-900 text-white' : 'hover:bg-gray-100 hover:text-gray-900'
                 }`}

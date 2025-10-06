@@ -3,7 +3,7 @@ import { GET } from '@/app/api/projects/route'
 
 describe('GET /api/projects', () => {
   it('returns project data with required fields', async () => {
-    const response = await GET()
+    const response = await GET(new Request('http://localhost/api/projects'))
     expect(response.status).toBe(200)
 
     const payload = await response.json()

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { useTouchGestures } from '@/hooks/useTouchGestures'
+import type { Route } from 'next'
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -13,7 +14,7 @@ const navItems = [
   { href: '/about', label: 'About' },
   { href: '/search', label: 'Search' },
   { href: '/resume', label: 'Résumé' },
-]
+] satisfies { href: Route; label: string }[]
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)

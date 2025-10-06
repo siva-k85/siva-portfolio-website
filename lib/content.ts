@@ -7,9 +7,11 @@ export type Front = {
   slug: string
   title: string
   summary?: string
+  description?: string
   role?: string[]
   tech?: string[]
   skills?: string[]
+  tags?: string[]
   cover?: string
   date?: string
   featured?: boolean

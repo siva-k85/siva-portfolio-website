@@ -37,7 +37,7 @@ export default function TrackedLink({ href, children, event, props, className, t
   }
 
   return (
-    <Link href={href} onClick={handleClick} className={className}>
+    <Link href={href as any} onClick={handleClick} className={className}>
       {children}
     </Link>
   )

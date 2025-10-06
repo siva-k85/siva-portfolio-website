@@ -10,7 +10,7 @@ interface TouchGestureOptions {
 }
 
 export function useTouchGestures(
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   options: TouchGestureOptions
 ) {
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null)
