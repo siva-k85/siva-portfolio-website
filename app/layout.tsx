@@ -38,37 +38,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="light" style={{ colorScheme: 'light' }} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <Script
-          id="theme-initializer"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var storageKey = 'theme';
-                  var classList = document.documentElement.classList;
-                  var storedTheme = window.localStorage.getItem(storageKey);
-                  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  var theme = storedTheme === 'light' || storedTheme === 'dark'
-                    ? storedTheme
-                    : (prefersDark ? 'dark' : 'light');
-
-                  classList.remove('light', 'dark');
-                  classList.add(theme);
-                  document.documentElement.dataset.theme = theme;
-                  document.documentElement.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
-                } catch (error) {
-                  document.documentElement.classList.remove('dark');
-                  document.documentElement.classList.add('light');
-                  document.documentElement.dataset.theme = 'light';
-                  document.documentElement.style.colorScheme = 'light';
-                }
-              })();
-            `,
-          }}
-        />
         <JsonLd />
         <Script
           id="plausible"
