@@ -77,10 +77,10 @@ export default function Graph2D({ data, focusId, onControlsReady }: Graph2DProps
             'label': 'data(label)',
             'text-wrap': 'wrap',
             'text-max-width': 160,
-            'font-size': 12,
+            'font-size': 11,
             'font-weight': 600,
             'color': '#e2e8f0',
-            'text-margin-y': -6,
+            'text-margin-y': -4,
             'width': 48,
             'height': 48,
             'background-color': '#0f172a',
@@ -112,7 +112,7 @@ export default function Graph2D({ data, focusId, onControlsReady }: Graph2DProps
             'border-width': 4,
             'width': 58,
             'height': 58,
-            'font-size': 14,
+            'font-size': 13,
             'shadow-blur': 32
           }
         },
@@ -122,7 +122,7 @@ export default function Graph2D({ data, focusId, onControlsReady }: Graph2DProps
             'border-width': 6,
             'width': 64,
             'height': 64,
-            'font-size': 16,
+            'font-size': 15,
             'shadow-blur': 42,
             'shadow-color': '#38bdf8aa'
           }

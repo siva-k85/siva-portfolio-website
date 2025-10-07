@@ -111,7 +111,7 @@ export default function GraphRenderer({ data, focusId }: GraphRendererProps) {
           <button
             type="button"
             className={`${baseButtonClasses} disabled:cursor-not-allowed disabled:opacity-40 ${
-              controls?.panEnabled ? 'bg-slate-800/80 text-sky-200' : ''
+              controls?.panEnabled ? 'border-sky-400/70 bg-slate-800/80 text-sky-200' : ''
             }`}
             onClick={() => controls?.togglePan()}
             disabled={!controls}

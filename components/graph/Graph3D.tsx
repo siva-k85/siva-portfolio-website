@@ -119,7 +119,7 @@ function createLabelTexture(text: string, color: string) {
   context.lineWidth = 5
   context.stroke()
 
-  context.font = 'bold 48px "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif'
+  context.font = 'bold 44px "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif'
   context.fillStyle = 'rgba(226,232,240,0.98)'
   context.textAlign = 'center'
   context.textBaseline = 'middle'
@@ -180,8 +180,8 @@ function buildNodeObject({
       opacity: isFocused ? 0.95 : isHovered ? 0.85 : 0.75
     })
   )
-  labelSprite.scale.set(40, 22, 22)
-  labelSprite.position.set(0, 16, 0)
+  labelSprite.scale.set(38, 21, 21)
+  labelSprite.position.set(0, 15, 0)
   group.add(labelSprite)
 
   return group
