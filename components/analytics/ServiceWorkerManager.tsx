@@ -14,11 +14,18 @@ export default function ServiceWorkerManager() {
       return
     }
 
-    navigator.serviceWorker.getRegistrations().then(registrations => {
-      registrations.forEach(registration => {
-        registration.unregister().catch(error => console.error('Service worker unregistration failed', error))
+    if (typeof navigator.serviceWorker.getRegistrations !== 'function') return
+
+    navigator.serviceWorker
+      .getRegistrations()
+      .then(registrations => {
+        registrations.forEach(registration => {
+          registration.unregister().catch(error => console.error('Service worker unregistration failed', error))
+        })
       })
-    })
+      .catch(error => {
+        console.error('Service worker lookup failed', error)
+      })
   }, [])
 
   return null
