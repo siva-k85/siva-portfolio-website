@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
 }
 
-import Provider from './provider'
+import Providers from './providers'
 
 export default function RootLayout({
   children,
@@ -38,18 +38,30 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <Script
+          id="noflash"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                // Prevent flash of unstyled content
+                document.documentElement.style.visibility = 'visible';
+              })();
+            `,
+          }}
+        />
         <JsonLd />
         <Script
+          id="plausible"
           src="https://plausible.io/js/script.js"
           data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || process.env.PLAUSIBLE_DOMAIN || 'sivakomaragiri.com'}
           strategy="lazyOnload"
         />
         <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Healthcare Analytics Notes" />
       </head>
-      <body className="relative antialiased">
-        <Provider>
+      <body className="relative antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100" suppressHydrationWarning>
+        <Providers>
           <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-gray-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
             Skip to content
           </a>
@@ -65,7 +77,7 @@ export default function RootLayout({
           </Suspense>
           <PerformancePanel />
           <ServiceWorkerManager />
-        </Provider>
+        </Providers>
       </body>
     </html>
   )

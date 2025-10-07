@@ -22,31 +22,52 @@ const cards = [
   },
 ]
 
+const floatingAnimation = {
+  y: [-2, 2, -2],
+  transition: {
+    duration: 4,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }
+}
+
 export default function FloatingCards() {
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:gap-6 lg:justify-between">
       {cards.map((card, index) => (
         <motion.div
           key={card.title}
-          className="flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-lg hover:shadow-xl transition-shadow"
+          className="flex-1 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 shadow-lg hover:shadow-2xl dark:shadow-blue-500/10 transition-all duration-300 backdrop-blur"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            ...floatingAnimation
+          }}
           transition={{
             duration: 0.5,
             delay: index * 0.1,
+            y: {
+              ...floatingAnimation.transition,
+              delay: index * 0.3
+            }
           }}
           whileHover={{
-            y: -4,
+            y: -8,
+            scale: 1.02,
             transition: { duration: 0.2 }
           }}
         >
-          <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} mb-4`}>
+          <motion.div
+            className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} mb-4 shadow-lg`}
+            whileHover={{ rotate: 360, transition: { duration: 0.5 } }}
+          >
             <span className="text-2xl">{card.icon}</span>
-          </div>
-          <h3 className="text-lg font-bold text-gray-900 mb-2">
+          </motion.div>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
             {card.title}
           </h3>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
             {card.description}
           </p>
         </motion.div>
