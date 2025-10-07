@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import ProjectsGrid from '@/components/projects/ProjectsGrid'
+import EnhancedProjectsGrid from '@/components/projects/EnhancedProjectsGrid'
 import ProjectsGridSkeleton from '@/components/projects/ProjectsGridSkeleton'
 import ContactForm from '@/components/contact/ContactForm'
 import TrackedLink from '@/components/analytics/TrackedLink'
@@ -104,7 +105,7 @@ export default function HomePage() {
           </p>
         </div>
         <Suspense fallback={<ProjectsGridSkeleton count={6} />}>
-          <ProjectsGrid limit={6} />
+          <EnhancedProjectsGrid />
         </Suspense>
       </section>
 
