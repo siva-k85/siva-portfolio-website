@@ -69,7 +69,7 @@ export default function Graph2D({ data, focusId, onControlsReady }: Graph2DProps
             'active-bg-size': 0,
             'selection-box-border-color': '#38bdf8',
             'selection-box-border-width': 1
-          }
+          } as any
         },
         {
           selector: 'node',
@@ -193,7 +193,7 @@ export default function Graph2D({ data, focusId, onControlsReady }: Graph2DProps
       evt.target.removeClass('hovered')
     })
 
-    cy.once('layoutstop', () => {
+    cy.one('layoutstop', () => {
       cy.fit(undefined, 80)
     })
 

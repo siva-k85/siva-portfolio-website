@@ -10,6 +10,8 @@ import ShareButtons from '@/components/ui/ShareButtons'
 import NoteJsonLd from '@/components/seo/NoteJsonLd'
 import { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   const dir = path.join(process.cwd(), 'content/notes')
   const files = await fg('*.mdx', { cwd: dir })

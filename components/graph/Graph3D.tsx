@@ -225,7 +225,7 @@ export default function Graph3D({ data, focusId, onControlsReady }: Graph3DProps
   const applyZoomFactor = useCallback((factor: number) => {
     const graph = graphRef.current
     if (!graph?.zoom) return
-    const current = graph.zoom() ?? 1
+    const current = (graph as any).zoom?.() ?? 1
     const next = Math.min(10, Math.max(0.35, current * factor))
     graph.zoom(next, 500)
   }, [])
@@ -245,8 +245,8 @@ export default function Graph3D({ data, focusId, onControlsReady }: Graph3DProps
   useEffect(() => {
     const controls = graphRef.current?.controls?.()
     if (!controls) return
-    controls.enablePan = panEnabled
-    controls.update?.()
+    (controls as any).enablePan = panEnabled
+    ;(controls as any).update?.()
   }, [panEnabled])
 
   useEffect(() => {

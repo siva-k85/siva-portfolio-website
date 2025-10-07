@@ -9,6 +9,8 @@ import ShareButtons from '@/components/ui/ShareButtons'
 import { listProjects } from '@/lib/content'
 import ProjectJsonLd from '@/components/seo/ProjectJsonLd'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   const dir = path.join(process.cwd(), 'content/projects')
   const files = await fg('*.mdx', { cwd: dir })

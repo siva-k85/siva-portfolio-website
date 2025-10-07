@@ -10,3 +10,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
 })
+
+// Export auth function for server-side session checking
+export const getServerAuthSession = auth
