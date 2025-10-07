@@ -1,5 +1,4 @@
 # Siva Komaragiri — Portfolio
-# Siva Komaragiri — Portfolio
 
 Healthcare analytics portfolio built with **Next.js 15**, **React 19**, and **Tailwind CSS v4**. The site showcases quantified case studies, research notes, and interactive data experiences tailored for healthcare executives and hiring managers.
 
