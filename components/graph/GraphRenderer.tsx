@@ -1,7 +1,8 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
 import type { GraphData } from '@/lib/graph'
+import type { GraphViewControls } from './types'
 
 const Graph3D = dynamic(() => import('./Graph3D'), { ssr: false })
 const Graph2D = dynamic(() => import('./Graph2D'), { ssr: false })
@@ -26,6 +27,7 @@ interface GraphRendererProps {
 export default function GraphRenderer({ data, focusId }: GraphRendererProps) {
   const [render3D, setRender3D] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [controls, setControls] = useState<GraphViewControls | null>(null)
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -48,6 +50,13 @@ export default function GraphRenderer({ data, focusId }: GraphRendererProps) {
       ].join(' '),
     []
   )
+
+  const handleControlsReady = useCallback((nextControls: GraphViewControls | null) => {
+    setControls(nextControls)
+  }, [])
+
+  const baseButtonClasses =
+    'rounded-full border border-slate-700/60 bg-slate-900/80 px-3 py-2 text-xs font-semibold text-slate-200 shadow-lg shadow-sky-500/10 transition hover:bg-slate-800/80'
 
   if (loading) {
     return (
@@ -80,10 +89,42 @@ export default function GraphRenderer({ data, focusId }: GraphRendererProps) {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(148,163,184,0.12)_1px,transparent_1px)] bg-[length:56px] opacity-30" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(148,163,184,0.12)_1px,transparent_1px)] bg-[length:56px] opacity-30" />
       <div className="relative h-full w-full">
+        <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
+          <button
+            type="button"
+            className={`${baseButtonClasses} disabled:cursor-not-allowed disabled:opacity-40`}
+            onClick={() => controls?.zoomIn()}
+            disabled={!controls}
+            title="Zoom in"
+          >
+            +
+          </button>
+          <button
+            type="button"
+            className={`${baseButtonClasses} disabled:cursor-not-allowed disabled:opacity-40`}
+            onClick={() => controls?.zoomOut()}
+            disabled={!controls}
+            title="Zoom out"
+          >
+            −
+          </button>
+          <button
+            type="button"
+            className={`${baseButtonClasses} disabled:cursor-not-allowed disabled:opacity-40 ${
+              controls?.panEnabled ? 'bg-slate-800/80 text-sky-200' : ''
+            }`}
+            onClick={() => controls?.togglePan()}
+            disabled={!controls}
+            title={controls?.panEnabled ? 'Disable panning' : 'Enable panning'}
+            aria-pressed={controls?.panEnabled ?? false}
+          >
+            Pan
+          </button>
+        </div>
         {render3D ? (
-          <Graph3D data={data} focusId={focusId} />
+          <Graph3D data={data} focusId={focusId} onControlsReady={handleControlsReady} />
         ) : (
-          <Graph2D data={data} focusId={focusId} />
+          <Graph2D data={data} focusId={focusId} onControlsReady={handleControlsReady} />
         )}
       </div>
     </div>
