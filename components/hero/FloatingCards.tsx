@@ -22,16 +22,17 @@ export default function FloatingCards() {
       {cards.map((card, index) => (
         <motion.div
           key={card.title}
-          className="absolute w-60 rounded-3xl border border-gray-200 bg-white p-6 shadow-lg"
+          className="absolute w-64 rounded-3xl border-2 border-gray-300 bg-white p-6 shadow-xl"
           style={{
             left: `${index * 30 + 5}%`,
             top: `${index * 40}px`,
+            zIndex: 10 - index,
           }}
           animate={{ y: [0, -16, 0] }}
           transition={{ duration: 3, repeat: Infinity, delay: index * 0.4, ease: 'easeInOut' }}
         >
-          <p className="text-sm font-semibold text-gray-900">{card.title}</p>
-          <p className="mt-2 text-xs text-gray-600">{card.description}</p>
+          <p className="text-base font-bold text-gray-900 leading-snug">{card.title}</p>
+          <p className="mt-3 text-sm text-gray-700 leading-relaxed">{card.description}</p>
         </motion.div>
       ))}
     </div>

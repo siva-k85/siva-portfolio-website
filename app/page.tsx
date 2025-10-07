@@ -5,6 +5,7 @@ import ContactForm from '@/components/contact/ContactForm'
 import TrackedLink from '@/components/analytics/TrackedLink'
 import FloatingCards from '@/components/hero/FloatingCards'
 import HeroCanvas from '@/components/hero/HeroCanvas'
+import ProfilePhoto from '@/components/hero/ProfilePhoto'
 
 const heroMetrics = [
   { value: '296%', label: 'Accreditation compliance lift' },
@@ -19,6 +20,7 @@ export default function HomePage() {
       <section className="relative mx-auto grid min-h-[80vh] max-w-6xl grid-cols-1 gap-12 overflow-hidden rounded-3xl border border-gray-200 bg-white/80 px-6 py-24 shadow-sm backdrop-blur lg:grid-cols-[1.1fr_0.9fr]">
         <HeroCanvas />
         <div className="space-y-8">
+          <ProfilePhoto />
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-gray-500">Healthcare Analytics Leader</p>
             <h1 className="mt-4 text-5xl font-semibold tracking-tight text-gray-900 lg:text-6xl">
