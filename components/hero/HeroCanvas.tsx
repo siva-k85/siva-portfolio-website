@@ -4,11 +4,19 @@ import { useEffect, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import ErrorBoundary from '@/components/ui/ErrorBoundary'
 
-const Hero3D = dynamic(() => import('./Hero3D'), {
+const SimpleHeroBackground = dynamic(() => import('./SimpleHeroBackground'), {
   ssr: false,
   loading: () => (
     <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-purple-100 animate-pulse" aria-hidden="true" />
   )
+})
+
+const Hero3D = dynamic(() => import('./Hero3D').catch(() => {
+  // If Hero3D fails to load, return null
+  return { default: () => null }
+}), {
+  ssr: false,
+  loading: () => null
 })
 
 type RenderMode = 'loading' | '3d-high' | '3d-low' | 'static'
@@ -75,11 +83,13 @@ export default function HeroCanvas() {
   return (
     <ErrorBoundary
       fallback={
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-purple-100" aria-hidden="true" />
+        <SimpleHeroBackground />
       }
     >
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <Hero3D quality={mode === '3d-low' ? 'low' : 'high'} />
+        {/* If Hero3D doesn't render, show SimpleHeroBackground */}
+        <SimpleHeroBackground />
       </div>
     </ErrorBoundary>
   )

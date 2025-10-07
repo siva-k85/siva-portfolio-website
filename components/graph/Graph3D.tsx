@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import dynamic from 'next/dynamic'
-import type { ForceGraphMethods } from 'react-force-graph-3d'
 import type { GraphData } from '@/lib/graph'
+import dynamic from 'next/dynamic'
+import { useEffect, useRef } from 'react'
+import type { ForceGraphMethods } from 'react-force-graph-3d'
 
 const ForceGraph3D = dynamic(() => import('react-force-graph-3d'), { ssr: false })
 
