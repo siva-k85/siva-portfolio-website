@@ -1,14 +1,16 @@
 'use client'
 import cytoscape from 'cytoscape'
 import elk from 'cytoscape-elk'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { GraphData } from '@/lib/graph'
+import type { GraphViewControls } from './types'
 
 cytoscape.use(elk as any)
 
 interface Graph2DProps {
   data: GraphData
   focusId?: string | null
+  onControlsReady?: (controls: GraphViewControls | null) => void
 }
 
 const kindPalette: Record<string, { border: string; glow: string }> = {
@@ -20,9 +22,10 @@ const kindPalette: Record<string, { border: string; glow: string }> = {
   default: { border: '#94a3b8', glow: '#cbd5f5' }
 }
 
-export default function Graph2D({ data, focusId }: Graph2DProps) {
+export default function Graph2D({ data, focusId, onControlsReady }: Graph2DProps) {
   const ref = useRef<HTMLDivElement | null>(null)
   const cyRef = useRef<cytoscape.Core | null>(null)
+  const [panEnabled, setPanEnabled] = useState(true)
 
   useEffect(() => {
     if (!ref.current) return
@@ -74,7 +77,7 @@ export default function Graph2D({ data, focusId }: Graph2DProps) {
             'label': 'data(label)',
             'text-wrap': 'wrap',
             'text-max-width': 160,
-            'font-size': 14,
+            'font-size': 12,
             'font-weight': 600,
             'color': '#e2e8f0',
             'text-margin-y': -6,
@@ -109,7 +112,7 @@ export default function Graph2D({ data, focusId }: Graph2DProps) {
             'border-width': 4,
             'width': 58,
             'height': 58,
-            'font-size': 16,
+            'font-size': 14,
             'shadow-blur': 32
           }
         },
@@ -119,7 +122,7 @@ export default function Graph2D({ data, focusId }: Graph2DProps) {
             'border-width': 6,
             'width': 64,
             'height': 64,
-            'font-size': 18,
+            'font-size': 16,
             'shadow-blur': 42,
             'shadow-color': '#38bdf8aa'
           }
@@ -194,8 +197,16 @@ export default function Graph2D({ data, focusId }: Graph2DProps) {
       cy.fit(undefined, 80)
     })
 
-    return () => cy.destroy()
+    return () => {
+      cy.destroy()
+      cyRef.current = null
+    }
   }, [data])
+
+  useEffect(() => {
+    if (!cyRef.current) return
+    cyRef.current.userPanningEnabled(panEnabled)
+  }, [panEnabled])
 
   useEffect(() => {
     if (!focusId || !cyRef.current) return
@@ -212,6 +223,45 @@ export default function Graph2D({ data, focusId }: Graph2DProps) {
       }
     })
   }, [focusId])
+
+  const applyZoomFactor = useCallback(
+    (factor: number) => {
+      const cy = cyRef.current
+      if (!cy || !ref.current) return
+      const current = cy.zoom()
+      const min = cy.minZoom()
+      const max = cy.maxZoom()
+      const next = Math.min(max, Math.max(min, current * factor))
+      const rect = ref.current.getBoundingClientRect()
+      cy.zoom({
+        level: next,
+        renderedPosition: { x: rect.width / 2, y: rect.height / 2 }
+      })
+    },
+    []
+  )
+
+  const zoomIn = useCallback(() => applyZoomFactor(1.2), [applyZoomFactor])
+  const zoomOut = useCallback(() => applyZoomFactor(0.82), [applyZoomFactor])
+  const togglePan = useCallback(() => setPanEnabled(prev => !prev), [])
+
+  useEffect(() => {
+    if (!ref.current) return
+    ref.current.classList.toggle('cursor-grab', panEnabled)
+    ref.current.classList.toggle('cursor-default', !panEnabled)
+  }, [panEnabled])
+
+  useEffect(() => {
+    if (!onControlsReady) return
+    onControlsReady({ zoomIn, zoomOut, togglePan, panEnabled })
+  }, [onControlsReady, zoomIn, zoomOut, togglePan, panEnabled])
+
+  useEffect(() => {
+    if (!onControlsReady) return
+    return () => {
+      onControlsReady(null)
+    }
+  }, [onControlsReady])
 
   return (
     <div className="relative h-full w-full">

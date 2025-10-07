@@ -77,9 +77,9 @@ export default function HomePage() {
             </span>
           </div>
         </div>
-        <div className="flex flex-col justify-between rounded-3xl border border-gray-200 bg-white p-8 shadow-lg">
+        <div className="space-y-6">
           <FloatingCards />
-          <div className="mt-6">
+          <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-lg">
             <h2 className="text-xl font-semibold text-gray-900">Recent wins</h2>
             <ul className="mt-4 space-y-3 text-sm leading-6 text-gray-600">
               <li>• Rebuilt value-based care modeling delivering $6.7M in shared savings.</li>

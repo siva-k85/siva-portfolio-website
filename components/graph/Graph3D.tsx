@@ -1,7 +1,7 @@
 'use client'
 import type { GraphData } from '@/lib/graph'
 import dynamic from 'next/dynamic'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { ForceGraphMethods } from 'react-force-graph-3d'
 import {
   AdditiveBlending,
@@ -15,18 +15,24 @@ import {
   SpriteMaterial,
   SphereGeometry
 } from 'three'
+import type { GraphViewControls } from './types'
 
 const ForceGraph3D = dynamic(() => import('react-force-graph-3d'), { ssr: false })
 
 interface Graph3DProps {
   data: GraphData
   focusId?: string | null
+  onControlsReady?: (controls: GraphViewControls | null) => void
 }
 
 type ForceGraphInstance = ForceGraphMethods & {
   graphData: () => GraphData
   centerAt?: (x: number, y: number, ms?: number) => void
   zoom?: (scale: number, ms?: number) => void
+  controls?: () => {
+    enablePan: boolean
+    update?: () => void
+  }
 }
 
 const glowTextureCache = new Map<string, CanvasTexture>()
@@ -113,7 +119,7 @@ function createLabelTexture(text: string, color: string) {
   context.lineWidth = 6
   context.stroke()
 
-  context.font = 'bold 64px "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif'
+  context.font = 'bold 52px "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif'
   context.fillStyle = 'rgba(226,232,240,0.98)'
   context.textAlign = 'center'
   context.textBaseline = 'middle'
@@ -174,8 +180,8 @@ function buildNodeObject({
       opacity: isFocused ? 0.95 : isHovered ? 0.85 : 0.75
     })
   )
-  labelSprite.scale.set(55, 28, 28)
-  labelSprite.position.set(0, 20, 0)
+  labelSprite.scale.set(46, 24, 24)
+  labelSprite.position.set(0, 18, 0)
   group.add(labelSprite)
 
   return group
@@ -190,9 +196,10 @@ const kindColors: Record<string, string> = {
   default: '#64748b'
 }
 
-export default function Graph3D({ data, focusId }: Graph3DProps) {
+export default function Graph3D({ data, focusId, onControlsReady }: Graph3DProps) {
   const graphRef = useRef<ForceGraphInstance | undefined>(undefined)
   const [hoveredNodeId, setHoveredNodeId] = useState<string | number | null>(null)
+  const [panEnabled, setPanEnabled] = useState(true)
 
   const linkHighlightSet = useMemo(() => {
     const highlight = new Set<string | number>()
@@ -214,6 +221,45 @@ export default function Graph3D({ data, focusId }: Graph3DProps) {
       zoom?.(4, 1000)
     }
   }, [focusId])
+
+  const applyZoomFactor = useCallback((factor: number) => {
+    const graph = graphRef.current
+    if (!graph?.zoom) return
+    const current = graph.zoom() ?? 1
+    const next = Math.min(10, Math.max(0.35, current * factor))
+    graph.zoom(next, 500)
+  }, [])
+
+  const zoomIn = useCallback(() => {
+    applyZoomFactor(1.2)
+  }, [applyZoomFactor])
+
+  const zoomOut = useCallback(() => {
+    applyZoomFactor(0.82)
+  }, [applyZoomFactor])
+
+  const togglePan = useCallback(() => {
+    setPanEnabled(prev => !prev)
+  }, [])
+
+  useEffect(() => {
+    const controls = graphRef.current?.controls?.()
+    if (!controls) return
+    controls.enablePan = panEnabled
+    controls.update?.()
+  }, [panEnabled])
+
+  useEffect(() => {
+    if (!onControlsReady) return
+    onControlsReady({ zoomIn, zoomOut, togglePan, panEnabled })
+  }, [onControlsReady, zoomIn, zoomOut, togglePan, panEnabled])
+
+  useEffect(() => {
+    if (!onControlsReady) return
+    return () => {
+      onControlsReady(null)
+    }
+  }, [onControlsReady])
 
   return (
     <ForceGraph3D
